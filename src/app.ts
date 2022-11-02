@@ -4,10 +4,10 @@ import morgan from "morgan";
 import cors from "cors";
 import { router } from "./routes";
 import { dbConnectMysql } from "./config/mysql";
+import path from "path";
 
 class App {
-  public readonly app: Application;
-  public readonly engine_db: string = <string>process.env.ENGINE_DB;
+  private readonly app: Application;
   constructor() {
     this.app = express();
     this.config();
@@ -15,22 +15,23 @@ class App {
     this.connected();
   }
 
-  config(): void {
+  public config(): void {
     this.app.set("port", process.env.PORT || "3001");
     this.app.use(morgan("dev"));
     this.app.use(cors());
     this.app.use(express.json());
+    this.app.use(express.static(path.join(__dirname, "public")));
   }
 
-  routes(): void {
+  public routes(): void {
     this.app.use(router);
   }
 
-  connected(): void {
+  public connected(): void {
     dbConnectMysql();
   }
 
-  init(): void {
+  public init(): void {
     this.app.listen(this.app.get("port"), () => {
       console.log(`Escuchando el puerto ${this.app.get("port")}`);
     });

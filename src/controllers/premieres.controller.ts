@@ -6,7 +6,7 @@ class PremieresController {
   public async getItems(req: Request, res: Response) {
     try {
       const response = await getAllPremieres();
-      res.send(response);
+      res.json({ premieres: response });
     } catch (error) {
       handleHttp(res, "ERROR_GET_ITEMS", error);
     }
@@ -15,7 +15,7 @@ class PremieresController {
   public async getItem(req: Request, res: Response) {
     try {
       const response = await getPremieres(parseInt(req.params.id));
-      res.send(response);
+      res.json({ premieres: response });
     } catch (error) {
       handleHttp(res, "ERROR_GET_ITEM", error);
     }

@@ -10,7 +10,7 @@ create table premieres(
   image varchar(150) not null
 );
 
-create table candystore(
+create table candystores(
   id int(11) not null auto_increment primary key,
   name varchar(150) not null,
   description varchar(50) not null,

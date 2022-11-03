@@ -1,5 +1,5 @@
 import "dotenv/config";
-import express, { Application } from "express";
+import express, { Application, Response } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import { router } from "./routes";
@@ -25,6 +25,7 @@ class App {
 
   public routes(): void {
     this.app.use(router);
+    this.app.get("/", (_, res: Response) => res.json({ name: "cineplanet" }));
   }
 
   public connected(): void {

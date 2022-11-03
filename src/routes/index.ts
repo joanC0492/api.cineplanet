@@ -13,9 +13,14 @@ class Routes {
     return this.router;
   }
 
+  cleanFileName(fileName: string): string {
+    const file = <string>fileName.split(".").shift();
+    return file;
+  }
+
   init(): void {
     readdirSync(this.PATH_ROUTES).filter((fileName: string) => {
-      const cleanName = fileName.replace(".ts", "");
+      const cleanName = this.cleanFileName(fileName);
       if (cleanName !== "index") {
         import(`./${cleanName}`).then((item) =>
           this.router.use(`/${cleanName}`, item.router)

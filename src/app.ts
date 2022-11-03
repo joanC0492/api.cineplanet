@@ -25,7 +25,6 @@ class App {
 
   public routes(): void {
     this.app.use(router);
-    this.app.get("/", (_, res: Response) => res.json({ name: "cineplanet" }));
   }
 
   public connected(): void {
